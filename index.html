@@ -9,71 +9,271 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* --- Same styles as before --- */
-body { font-family: 'Baloo 2', cursive, sans-serif; background: linear-gradient(to bottom, #87CEEB, #00BFFF); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
-.panel { position: relative; width: 93%; max-width: 700px; background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 25px; box-shadow: 0px 8px 18px rgba(0,0,0,0.2); padding: 25px; margin-bottom: 20px; overflow: hidden; box-sizing: border-box; }
-.panel::before { content: ""; position: absolute; inset: 0; background-image: url("https://i.pinimg.com/236x/02/02/e9/0202e9798ea447ad13dc5e83bbc6e6b3.jpg"); background-size: cover; background-position: center; opacity: 0.1; z-index: 0; }
+body {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  background: linear-gradient(to bottom, #87CEEB, #00BFFF);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Authentication Panel */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Panels with Glassmorphism */
+.panel {
+  position: relative;
+  width: 93%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 0px 8px 18px rgba(0,0,0,0.2);
+  padding: 25px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://i.pinimg.com/236x/02/02/e9/0202e9798ea447ad13dc5e83bbc6e6b3.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  z-index: 0;
+}
+
 .panel * { position: relative; z-index: 1; }
-h1 { color: #ffcc00; text-shadow: 2px 2px #000; text-align: center; margin-bottom: 20px; font-size: 2em; }
-input[type="email"], input[type="password"], input[type="text"], textarea { width: 100%; padding: 12px; margin-bottom: 10px; border: 3px solid #ffcc00; border-radius: 20px; font-size: 15px; box-sizing: border-box; font-family: 'Baloo 2', cursive, sans-serif; }
-textarea { height: 130px; resize: none; background: #fffacd; box-shadow: inset 0px 2px 8px rgba(0,0,0,0.1); }
+
+h1 {
+  color: #ffcc00;
+  text-shadow: 2px 2px #000;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  word-wrap: break-word;
+}
+
+input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 3px solid #ffcc00;
+  border-radius: 20px;
+  font-size: 15px;
+  box-sizing: border-box;
+  font-family: 'Baloo 2', cursive, sans-serif;
+}
+
+textarea {
+  height: 130px;
+  resize: none;
+  background: #fffacd;
+  box-shadow: inset 0px 2px 8px rgba(0,0,0,0.1);
+}
+
 .preview { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 10px; }
 .preview div { position: relative; display: inline-block; }
 .preview img { max-width: 100px; max-height: 100px; border-radius: 15px; border: 3px dashed #ffcc00; }
-.remove-img { position: absolute; top: 2px; right: 2px; background: red; color: white; border: none; border-radius: 50%; font-size: 12px; cursor: pointer; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0px 2px 4px rgba(0,0,0,0.3); }
-button { margin-top: 10px; background: #ffcc00; border: none; color: #000; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: 0.3s; box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00; }
-button:hover { box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; background: #f6e05e; }
-.char-counter { font-size: 12px; color: #555; text-align: right; margin-top: -8px; margin-bottom: 8px; }
-.entries { margin-top: 10px; display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; max-height: 400px; overflow-y: auto; }
+
+.remove-img {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Neon Buttons */
+button {
+  background: #ffcc00;
+  border: none;
+  color: #000;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+}
+button:hover {
+  box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00;
+  background: #f6e05e;
+}
+
+/* Button row for save/logout */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.button-row button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+/* Character counter */
+.char-counter {
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+/* Timeline Entries */
+.entries {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar */
 .entries::-webkit-scrollbar { width: 10px; }
 .entries::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); border-radius: 10px; }
 .entries::-webkit-scrollbar-thumb { background: #ffcc00; border-radius: 10px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
-.entry { position: relative; background: linear-gradient(to bottom, #fffacd, #fff5b1); border-left: 6px solid #ffcc00; border-radius: 12px; padding: 15px; word-wrap: break-word; box-shadow: 0px 4px 14px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; }
-.entry-header { display: flex; align-items: center; margin-bottom: 10px; }
-.entry-avatar { width: 40px; height: 40px; border-radius: 50%; background: #ffcc00 center/cover no-repeat; margin-right: 10px; border: 2px solid #fff; }
+
+.entry {
+  position: relative;
+  background: linear-gradient(to bottom, #fffacd, #fff5b1);
+  border-left: 6px solid #ffcc00;
+  border-radius: 12px;
+  padding: 15px 15px 10px 15px;
+  margin-bottom: 0;
+  word-wrap: break-word;
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.entry:hover { transform: translateY(-2px); }
+
+.entry-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.entry-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffcc00 url("https://i.pinimg.com/originals/70/39/1f/70391f8c22da7f6d9a3f55e9f6c6d11c.png") center/cover no-repeat;
+  margin-right: 10px;
+  border: 2px solid #fff;
+}
 .entry-user { font-weight: bold; color: #ffcc00; text-shadow: 1px 1px #000; }
-.entry-date { font-size: 12px; color: #444; margin-left: auto; background: #fffacd; border: 2px solid #ffcc00; border-radius: 20px; padding: 4px 10px; box-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+.entry-date {
+  font-size: 12px;
+  color: #444;
+  margin-left: auto;
+  position: relative;
+  background: #fffacd;
+  border: 2px solid #ffcc00;
+  border-radius: 20px;
+  padding: 4px 10px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
 .entry-buttons { margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end; }
 .entry-buttons button { background: #ffcc00; border: none; border-radius: 15px; padding: 6px 12px; cursor: pointer; font-size: 0.85em; transition: 0.2s; }
 .entry-buttons button:hover { background: #f6e05e; }
-#diaryButtons { display:flex; justify-content: space-between; flex-wrap: wrap; gap:10px; }
-@media (max-width: 600px) { .panel { width: 100%; height: 100vh; border-radius: 0; padding: 15px; overflow-y: auto; } button { padding: 15px; font-size: 16px; } #diaryButtons button { width: calc(50% - 10px); } }
+
+/* Timeline background floating bubbles */
+.timeline-bubble {
+  position: fixed;
+  bottom: -50px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  animation: floatTimeline 12s infinite ease-in;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes floatTimeline {
+  0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+  50% { transform: translateY(-50vh) translateX(20px); opacity: 0.7; }
+  100% { transform: translateY(-120vh) translateX(0); opacity: 0; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .panel { width: 100%; height: 100vh; border-radius: 0; padding: 15px; overflow-y: auto; }
+  button { padding: 15px; font-size: 16px; }
+  .button-row button { margin: 0 2px; }
+}
 </style>
 </head>
 <body>
 
 <!-- Authentication Panel -->
-<div class="panel" id="authPanel">
-  <h1>🔒 Login / Register 🔒</h1>
-  <input type="email" id="email" placeholder="Email">
-  <div style="position: relative; width: 100%; margin-bottom: 10px;">
-    <input type="password" id="password" placeholder="Password" style="width:100%; padding-right:40px;">
-    <button type="button" id="togglePassword" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:#ffcc00; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:16px; text-align:center; line-height:28px;">👁️</button>
+<div class="auth-container">
+  <div class="panel" id="authPanel">
+    <h1>🔒 Login / Register 🔒</h1>
+    <input type="email" id="email" placeholder="Email">
+    <div style="position: relative; width: 100%; margin-bottom: 10px;">
+      <input type="password" id="password" placeholder="Password" style="width:100%; padding-right:40px;">
+      <button type="button" id="togglePassword" style="
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #ffcc00;
+        border: none;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        line-height: 28px;
+      ">👁️</button>
+    </div>
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
   </div>
-  <button onclick="login()">Login</button>
-  <button onclick="register()">Register</button>
-</div>
-
-<!-- Profile Panel -->
-<div class="panel" id="profilePanel" style="display:none;">
-  <h1>🖌️ Setup Profile 🖌️</h1>
-  <input type="text" id="displayNameInput" placeholder="Enter username">
-  <input type="file" id="profilePhotoInput" accept="image/*">
-  <div class="preview" id="profilePreview"></div>
-  <button onclick="saveProfile()">Save Profile</button>
 </div>
 
 <!-- Diary Panel -->
 <div class="panel" id="diaryPanel" style="display:none;">
   <h1>🍍 Dear Diary 🍍</h1>
-  <textarea id="diaryText" placeholder="Write something..." maxlength="500"></textarea>
+  <textarea id="diaryText" placeholder="Wat hafen vella?" maxlength="500"></textarea>
   <div class="char-counter" id="charCounter">0 / 500</div>
   <input type="file" id="imageInput" accept="image/*" multiple>
   <div class="preview" id="preview"></div>
-  <div id="diaryButtons">
+  
+  <!-- Buttons in one row -->
+  <div class="button-row">
     <button onclick="saveEntry()">📥 Save Entry</button>
     <button onclick="logout()">Logout</button>
-    <button onclick="editProfile()">✏️ Edit Profile</button>
   </div>
 </div>
 
@@ -83,7 +283,7 @@ button:hover { box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; background: #f6e0
   <div class="entries" id="entries"></div>
 </div>
 
-<!-- Audio -->
+<!-- Audio files -->
 <audio id="sound1" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg"></audio>
 <audio id="sound2" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg"></audio>
 <audio id="sound3" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg"></audio>
@@ -91,8 +291,7 @@ button:hover { box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; background: #f6e0
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAmqyE4CxelCoSxEwqPcxkfY-Z3ivyGasA",
@@ -107,152 +306,93 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app);
 
 const preview = document.getElementById("preview");
 const imageInput = document.getElementById("imageInput");
 let imagesData = [];
 
-const profilePreview = document.getElementById("profilePreview");
-const profilePhotoInput = document.getElementById("profilePhotoInput");
-let profilePhotoFile = null;
-
 const diaryText = document.getElementById("diaryText");
 const charCounter = document.getElementById("charCounter");
 diaryText.addEventListener("input", ()=>{ charCounter.textContent = `${diaryText.value.length} / 500`; });
 
-// Profile photo preview
-profilePhotoInput.addEventListener("change", function(){
-  profilePhotoFile = this.files[0];
-  if(profilePhotoFile){
-    const reader = new FileReader();
-    reader.onload = e=>{
-      profilePreview.innerHTML = `<img src="${e.target.result}" style="max-width:100px;border-radius:50%;">`;
-    }
-    reader.readAsDataURL(profilePhotoFile);
-  }
-});
-
-// Diary image preview
-imageInput.addEventListener("change", function(){
+imageInput.addEventListener("change", function() {
   const files = Array.from(this.files);
-  files.forEach(file=>{
+  files.forEach(file => {
     const reader = new FileReader();
-    reader.onload = e=>{
-      const src = e.target.result;
-      imagesData.push(file); // store File for upload
+    reader.onload = function(e) {
+      const imgSrc = e.target.result;
+      imagesData.push(imgSrc);
       const div = document.createElement("div");
-      div.innerHTML = `<img src="${src}"><button class="remove-img">✖</button>`;
-      div.querySelector("button").addEventListener("click", ()=>{
-        imagesData = imagesData.filter(f=>f!==file);
-        div.remove();
-      });
+      div.innerHTML = `<img src="${imgSrc}"><button class="remove-img">✖</button>`;
+      div.querySelector("button").addEventListener("click", ()=>{ imagesData = imagesData.filter(i => i!==imgSrc); div.remove(); });
       preview.appendChild(div);
     }
     reader.readAsDataURL(file);
   });
 });
 
-window.register = async function(){
+window.register = async function() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  try {
-    await createUserWithEmailAndPassword(auth,email,password);
-    alert("Registered! Now set up your profile.");
-  } catch(e){ alert(e.message); }
+  try { await createUserWithEmailAndPassword(auth,email,password); alert("Registered!"); }
+  catch(e){ alert(e.message); }
 }
 
-window.login = async function(){
+window.login = async function() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   try { await signInWithEmailAndPassword(auth,email,password); }
   catch(e){ alert(e.message); }
 }
 
-window.logout = async function(){ await signOut(auth); }
+window.logout = async function() { await signOut(auth); }
 
 onAuthStateChanged(auth,user=>{
-  const authPanel = document.getElementById("authPanel");
-  const profilePanel = document.getElementById("profilePanel");
-  const diaryPanel = document.getElementById("diaryPanel");
-  const entriesPanel = document.getElementById("entriesPanel");
+  const authContainer = document.querySelector(".auth-container");
   if(user){
-    authPanel.style.display="none";
-    if(!user.displayName){
-      profilePanel.style.display="block";
-    } else {
-      diaryPanel.style.display="block";
-      entriesPanel.style.display="block";
-      displayEntries();
-    }
-  } else {
-    authPanel.style.display="block";
-    profilePanel.style.display="none";
-    diaryPanel.style.display="none";
-    entriesPanel.style.display="none";
-  }
-});
-
-// Save profile
-async function saveProfile(){
-  const displayName = document.getElementById("displayNameInput").value.trim();
-  if(!displayName){ alert("Enter username"); return; }
-
-  let photoURL = null;
-  if(profilePhotoFile){
-    const storageRef = ref(storage, `profilePhotos/${auth.currentUser.uid}_${Date.now()}`);
-    const snapshot = await uploadBytesResumable(storageRef, profilePhotoFile);
-    photoURL = await getDownloadURL(snapshot.ref);
-  }
-
-  try{
-    await updateProfile(auth.currentUser, { displayName, photoURL });
-    document.getElementById("profilePanel").style.display="none";
+    authContainer.style.display="none";
     document.getElementById("diaryPanel").style.display="block";
     document.getElementById("entriesPanel").style.display="block";
     displayEntries();
-    alert("Profile saved!");
-  } catch(e){ alert("Error saving profile: "+e.message); }
-}
-
-// Edit profile
-function editProfile(){
-  document.getElementById("displayNameInput").value = auth.currentUser.displayName || "";
-  profilePreview.innerHTML = auth.currentUser.photoURL ? `<img src="${auth.currentUser.photoURL}" style="max-width:100px;border-radius:50%;">` : "";
-  document.getElementById("profilePanel").style.display="block";
-  document.getElementById("diaryPanel").style.display="none";
-  document.getElementById("entriesPanel").style.display="none";
-}
-
-// Save diary entry with image upload
-window.saveEntry = async function(){
-  const text = diaryText.value.trim();
-  if(!text && imagesData.length===0){ alert("Write something or add a picture!"); return; }
-
-  let imageUrls = [];
-  for(const file of imagesData){
-    const storageRef = ref(storage, `diaryImages/${auth.currentUser.uid}_${Date.now()}_${file.name}`);
-    await uploadBytesResumable(storageRef, file);
-    const url = await getDownloadURL(storageRef);
-    imageUrls.push(url);
+  } else {
+    authContainer.style.display="flex";
+    document.getElementById("diaryPanel").style.display="none";
+    document.getElementById("entriesPanel").style.display="none";
   }
+});
 
-  try{
+const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+togglePassword.addEventListener("click", ()=>{
+  const type = passwordInput.type === "password" ? "text" : "password";
+  passwordInput.type = type;
+  togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+});
+
+window.saveEntry = async function() {
+  const text = diaryText.value.trim();
+  if(!text && imagesData.length===0){ alert("Write something or add at least one picture!"); return; }
+  try {
     await addDoc(collection(db,"entries"),{
       text,
-      images: imageUrls,
+      images: imagesData,
       date: new Date().toISOString(),
       userId: auth.currentUser.uid
     });
-    diaryText.value=""; charCounter.textContent="0 / 500"; preview.innerHTML=""; imagesData=[];
+    diaryText.value=""; charCounter.textContent="0 / 500";
+    preview.innerHTML=""; imagesData=[];
     displayEntries();
     const sounds = [document.getElementById("sound1"), document.getElementById("sound2"), document.getElementById("sound3")];
-    sounds[Math.floor(Math.random()*sounds.length)].play().catch(()=>{});
+    const randomSound = sounds[Math.floor(Math.random()*sounds.length)];
+    randomSound.currentTime = 0; randomSound.play().catch(err=>console.log("Audio blocked:",err));
   } catch(e){ console.error(e); }
 }
 
 window.deleteEntry = async function(id){
-  if(confirm("Delete this entry?")){ await deleteDoc(doc(db,"entries",id)); displayEntries(); }
+  if(confirm("Are you sure you want to delete this entry?")){
+    await deleteDoc(doc(db,"entries",id));
+    displayEntries();
+  }
 }
 
 window.editEntry = async function(id){
@@ -260,26 +400,28 @@ window.editEntry = async function(id){
   if(newText!==null){ await updateDoc(doc(db,"entries",id),{text:newText}); displayEntries(); }
 }
 
+function formatDate(dateStr){ return new Date(dateStr).toLocaleString(undefined,{year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}); }
+
 async function displayEntries(){
   const entriesDiv = document.getElementById("entries");
   entriesDiv.innerHTML="";
-  const q = query(collection(db,"entries"), where("userId","==",auth.currentUser.uid));
+  const q = query(collection(db,"entries"),where("userId","==",auth.currentUser.uid));
   const snapshot = await getDocs(q);
-  const entriesArray = snapshot.docs.map(d=>({id:d.id,...d.data()}));
+  const entriesArray = snapshot.docs.map(docSnap=>({id:docSnap.id,...docSnap.data()}));
   entriesArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-  if(entriesArray.length===0){ entriesDiv.innerHTML="<p style='text-align:center; color:#555;'>No entries yet!</p>"; return; }
+  if(entriesArray.length===0){ entriesDiv.innerHTML = "<p style='text-align:center; color:#555;'>No entries yet. Write your first diary entry!</p>"; return; }
 
   entriesArray.forEach(entry=>{
+    const entryDiv = document.createElement("div");
+    entryDiv.className = "entry";
     let imagesHtml = "";
-    if(entry.images) entry.images.forEach(img=>{ imagesHtml+=`<img src="${img}">`; });
-    const div = document.createElement("div");
-    div.className="entry";
-    div.innerHTML=`
+    if(entry.images) entry.images.forEach(img=>{ imagesHtml += `<img src="${img}">`; });
+    entryDiv.innerHTML = `
       <div class="entry-header">
-        <div class="entry-avatar" style="background-image:url('${auth.currentUser.photoURL||"https://i.pinimg.com/originals/70/39/1f/70391f8c22da7f6d9a3f55e9f6c6d11c.png"}')"></div>
-        <div class="entry-user">${auth.currentUser.displayName||"Spongebob"}</div>
-        <div class="entry-date">🧽 ${new Date(entry.date).toLocaleString()}</div>
+        <div class="entry-avatar"></div>
+        <div class="entry-user">SpongeFan</div>
+        <div class="entry-date">🧽 ${formatDate(entry.date)}</div>
       </div>
       <div>${entry.text}</div>
       ${imagesHtml}
@@ -288,17 +430,22 @@ async function displayEntries(){
         <button onclick="deleteEntry('${entry.id}')">❌ Delete</button>
       </div>
     `;
-    entriesDiv.appendChild(div);
+    entriesDiv.appendChild(entryDiv);
   });
 }
 
-// Password toggle
-document.getElementById("togglePassword").addEventListener("click", ()=>{
-  const p = document.getElementById("password");
-  const type = p.type==="password"?"text":"password";
-  p.type=type;
-  document.getElementById("togglePassword").textContent=type==="password"?"👁️":"🙈";
-});
+function createTimelineBubble(){
+  const bubble = document.createElement("div");
+  const size = Math.random()*30+10;
+  bubble.className = "timeline-bubble";
+  bubble.style.width = size+"px";
+  bubble.style.height = size+"px";
+  bubble.style.left = Math.random()*window.innerWidth+"px";
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),12000);
+}
+setInterval(createTimelineBubble,2000);
+
 </script>
 </body>
 </html>
