@@ -13,10 +13,18 @@ body {
   font-family: 'Baloo 2', cursive, sans-serif;
   background: linear-gradient(to bottom, #87CEEB, #00BFFF);
   margin: 0;
-  padding: 20px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full viewport height */
+  width: 100%;
 }
 
 .panel {
@@ -128,7 +136,7 @@ button:hover { background: #f6e05e; }
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 1.2em; /* slightly smaller */
+  font-size: 1.2em;
   background: none;
   border: none;
   cursor: pointer;
@@ -152,7 +160,7 @@ button:hover { background: #f6e05e; }
   background: none;
   text-align: left;
   cursor: pointer;
-  font-size: 0.72em; /* 20% smaller */
+  font-size: 0.72em;
 }
 .menu-options button:hover {
   background: #f6e05e;
@@ -188,18 +196,20 @@ button:hover { background: #f6e05e; }
 </head>
 <body>
 
-<!-- Authentication Panel -->
-<div class="panel" id="authPanel">
-  <h1>🔒 Login / Register 🔒</h1>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <button onclick="register()">Register</button>
+<!-- Authentication Panel Wrapper -->
+<div class="auth-container">
+  <div class="panel" id="authPanel">
+    <h1>🔒 Login / Register 🔒</h1>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
+  </div>
 </div>
 
 <!-- Diary Panel -->
 <div class="panel" id="diaryPanel" style="display:none;">
-  <h1>🍍 Dear Spongebob 🍍</h1>
+  <h1>🍍 Dear Diary 🍍</h1>
   <textarea id="diaryText" placeholder="Wat hafen vella?"></textarea>
   <input type="file" id="imageInput" accept="image/*">
   <div class="preview" id="preview"></div>
@@ -278,13 +288,14 @@ window.login = async function() {
 window.logout = async function() { await signOut(auth); }
 
 onAuthStateChanged(auth,user=>{
+  const authContainer = document.querySelector(".auth-container");
   if(user){
-    document.getElementById("authPanel").style.display="none";
+    authContainer.style.display="none";
     document.getElementById("diaryPanel").style.display="block";
     document.getElementById("entriesPanel").style.display="block";
     displayEntries();
   } else {
-    document.getElementById("authPanel").style.display="block";
+    authContainer.style.display="flex";
     document.getElementById("diaryPanel").style.display="none";
     document.getElementById("entriesPanel").style.display="none";
   }
@@ -310,7 +321,6 @@ window.saveEntry = async function() {
   } catch(e){ console.error(e); }
 }
 
-// delete & edit functions
 window.deleteEntry = async function(id){
   if(confirm("Are you sure you want to delete this entry?")){
     await deleteDoc(doc(db,"entries",id));
@@ -351,7 +361,6 @@ async function displayEntries(){
   });
 }
 
-// toggle menu
 window.toggleMenu = function(button){
   const menu = button.nextElementSibling;
   menu.style.display = menu.style.display==="flex"?"none":"flex";
