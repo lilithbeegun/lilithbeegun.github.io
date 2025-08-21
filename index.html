@@ -275,6 +275,7 @@ const diaryText = document.getElementById("diaryText");
 const charCounter = document.getElementById("charCounter");
 diaryText.addEventListener("input", ()=>{ charCounter.textContent = `${diaryText.value.length} / 500`; });
 
+// Diary image upload preview
 imageInput.addEventListener("change", function() {
   const files = Array.from(this.files);
   files.forEach(file => {
@@ -304,6 +305,7 @@ profilePhotoInput.addEventListener("change", function(){
   }
 });
 
+// Register & Login
 window.register = async function() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
@@ -322,6 +324,7 @@ window.login = async function() {
 
 window.logout = async function() { await signOut(auth); }
 
+// Auth state change
 onAuthStateChanged(auth,user=>{
   const authPanel = document.getElementById("authPanel");
   const profilePanel = document.getElementById("profilePanel");
@@ -362,10 +365,11 @@ async function saveProfile(){
     document.getElementById("diaryPanel").style.display="block";
     document.getElementById("entriesPanel").style.display="block";
     displayEntries();
+    alert("Profile saved successfully!");
   } catch(e){ alert("Error saving profile: "+e.message); }
 }
 
-// Edit profile button
+// Edit profile
 function editProfile(){
   document.getElementById("displayNameInput").value = auth.currentUser.displayName || "";
   profilePreview.innerHTML = auth.currentUser.photoURL ? `<img src="${auth.currentUser.photoURL}" style="max-width:100px;border-radius:50%;">` : "";
@@ -415,51 +419,41 @@ async function displayEntries(){
   const entriesArray = snapshot.docs.map(docSnap=>({id:docSnap.id,...docSnap.data()}));
   entriesArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-  if(entriesArray.length===0){ entriesDiv.innerHTML = "<p style='text-align:center; color:#555;'>No entries yet. Write your first diary entry!</p>"; return; }
+  if(entriesArray.length===0){ entriesDiv.innerHTML="<p>No entries yet...</p>"; return; }
 
   entriesArray.forEach(entry=>{
-    const entryDiv = document.createElement("div");
-    entryDiv.className = "entry";
-    let imagesHtml = "";
-    if(entry.images) entry.images.forEach(img=>{ imagesHtml += `<img src="${img}">`; });
-    entryDiv.innerHTML = `
+    const div = document.createElement("div");
+    div.className="entry";
+    div.innerHTML=`
       <div class="entry-header">
-        <div class="entry-avatar" style="background-image:url('${auth.currentUser.photoURL||"https://i.pinimg.com/originals/70/39/1f/70391f8c22da7f6d9a3f55e9f6c6d11c.png"}')"></div>
-        <div class="entry-user">${auth.currentUser.displayName||"Spongebob"}</div>
-        <div class="entry-date">🧽 ${formatDate(entry.date)}</div>
+        <div class="entry-avatar" style="background-image:url('${auth.currentUser.photoURL||''}');"></div>
+        <div class="entry-user">${auth.currentUser.displayName||"Me"}</div>
+        <div class="entry-date">${formatDate(entry.date)}</div>
       </div>
-      <div>${entry.text}</div>
-      ${imagesHtml}
+      <div class="entry-text">${entry.text.replace(/\n/g,"<br>")}</div>
+      <div class="entry-images"></div>
       <div class="entry-buttons">
         <button onclick="editEntry('${entry.id}')">✏️ Edit</button>
         <button onclick="deleteEntry('${entry.id}')">❌ Delete</button>
       </div>
     `;
-    entriesDiv.appendChild(entryDiv);
+    const imgDiv = div.querySelector(".entry-images");
+    entry.images?.forEach(src=>{
+      const img = document.createElement("img");
+      img.src = src;
+      img.style.maxWidth="100px"; img.style.margin="5px"; img.style.borderRadius="12px";
+      imgDiv.appendChild(img);
+    });
+    entriesDiv.appendChild(div);
   });
 }
 
 // Password toggle
-document.getElementById("togglePassword").addEventListener("click", ()=>{
-  const passwordInput = document.getElementById("password");
-  const type = passwordInput.type === "password" ? "text" : "password";
-  passwordInput.type = type;
-  document.getElementById("togglePassword").textContent = type === "password" ? "👁️" : "🙈";
+document.getElementById("togglePassword").addEventListener("click", function(){
+  const pwd = document.getElementById("password");
+  this.textContent = pwd.type==="password"?"🙈":"👁️";
+  pwd.type = pwd.type==="password"?"text":"password";
 });
-
-// Timeline bubbles
-function createTimelineBubble(){
-  const bubble = document.createElement("div");
-  const size = Math.random()*30+10;
-  bubble.className = "timeline-bubble";
-  bubble.style.width = size+"px";
-  bubble.style.height = size+"px";
-  bubble.style.left = Math.random()*window.innerWidth+"px";
-  document.body.appendChild(bubble);
-  setTimeout(()=>bubble.remove(),12000);
-}
-setInterval(createTimelineBubble,2000);
-
 </script>
 </body>
 </html>
