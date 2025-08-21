@@ -23,13 +23,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100vh; /* full viewport height */
   width: 100%;
 }
 
 .panel {
   position: relative;
-  width: 90%;
+  width: 93%; /* slightly bigger login panel */
   max-width: 700px;
   background: #fefcbf;
   border-radius: 25px;
@@ -122,7 +122,7 @@ button:hover { background: #f6e05e; }
   background: rgba(255, 255, 224, 0.95);
   border: 3px solid #ffcc00;
   border-radius: 18px;
-  padding: 15px 45px 15px 15px; /* extra right padding to avoid overlap with menu */
+  padding: 15px;
   margin-bottom: 15px;
   word-wrap: break-word;
   box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
@@ -131,41 +131,21 @@ button:hover { background: #f6e05e; }
 .entry img { max-width: 100%; border-radius: 15px; margin-top: 8px; }
 .date { font-size: 12px; color: #444; margin-bottom: 8px; font-weight: bold; }
 
-/* Ellipsis menu */
-.menu-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.2em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 2;
+.entry-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
 }
-.menu-options {
-  display: none;
-  position: absolute;
-  top: 30px; /* appear below button */
-  right: 10px;
+.entry-buttons button {
   background: #ffcc00;
-  border-radius: 15px;
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
-  flex-direction: column;
-  z-index: 2;
-}
-.menu-options button {
-  width: 100%;
-  padding: 6px;
   border: none;
-  background: none;
-  text-align: left;
+  border-radius: 15px;
+  padding: 6px 12px;
   cursor: pointer;
-  font-size: 0.72em;
+  font-size: 0.85em;
+  transition: 0.2s;
 }
-.menu-options button:hover {
-  background: #f6e05e;
-  border-radius: 10px;
-}
+.entry-buttons button:hover { background: #f6e05e; }
 
 .bubble {
   position: fixed;
@@ -177,14 +157,13 @@ button:hover { background: #f6e05e; }
 
 @keyframes floatUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120vh); opacity: 0; } }
 
-/* Mobile responsiveness */
 @media (max-width: 600px) {
   body { padding: 10px; }
   h1 { font-size: 1.8em; }
   textarea { height: 120px; font-size: 14px; }
   button { padding: 10px 20px; font-size: 15px; }
   .panel { padding: 20px; border-radius: 20px; }
-  .entry { padding: 12px 40px 12px 12px; border-radius: 15px; }
+  .entry { padding: 12px; border-radius: 15px; }
   .remove-img { width: 25px; height: 25px; font-size: 14px; }
 }
 @media (min-width: 601px) and (max-width: 900px) {
@@ -224,9 +203,15 @@ button:hover { background: #f6e05e; }
 </div>
 
 <!-- Audio files -->
-<audio id="sound1" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg"></audio>
-<audio id="sound2" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg"></audio>
-<audio id="sound3" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg"></audio>
+<audio id="sound1" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound2" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound3" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg">
+</audio>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -345,19 +330,13 @@ async function displayEntries(){
       <div class="date">🧽 ${entry.date}</div>
       <div>${entry.text}</div>
       ${entry.image?`<img src="${entry.image}">`:""}
-      <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
-      <div class="menu-options">
+      <div class="entry-buttons">
         <button onclick="editEntry('${entry.id}')">✏️ Edit</button>
         <button onclick="deleteEntry('${entry.id}')">❌ Delete</button>
       </div>
     `;
     entriesDiv.appendChild(entryDiv);
   });
-}
-
-window.toggleMenu = function(button){
-  const menu = button.nextElementSibling;
-  menu.style.display = menu.style.display==="flex"?"none":"flex";
 }
 
 function createBubble(){
