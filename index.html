@@ -1,329 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Diary ng Pangeet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta charset="UTF-8">
+<title>Diary ng Pangeet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <!-- Google Font: Baloo 2 -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- Google Font: Baloo 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Baloo 2', cursive, sans-serif;
-      background: linear-gradient(to bottom, #87CEEB, #00BFFF);
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+<style>
+body {
+  font-family: 'Baloo 2', cursive, sans-serif;
+  background: linear-gradient(to bottom, #87CEEB, #00BFFF);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .panel {
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      background: #fefcbf;
-      border-radius: 25px;
-      box-shadow: 0px 8px 18px rgba(0,0,0,0.2);
-      padding: 25px;
-      margin-bottom: 20px;
-      border: 4px solid #ffcc00;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
+.panel {
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  background: #fefcbf;
+  border-radius: 25px;
+  box-shadow: 0px 8px 18px rgba(0,0,0,0.2);
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 4px solid #ffcc00;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
-    .panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("https://i.pinimg.com/236x/02/02/e9/0202e9798ea447ad13dc5e83bbc6e6b3.jpg");
-      background-size: cover;
-      background-position: center;
-      opacity: 0.1;
-      z-index: 0;
-    }
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://i.pinimg.com/236x/02/02/e9/0202e9798ea447ad13dc5e83bbc6e6b3.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  z-index: 0;
+}
 
-    .panel * { position: relative; z-index: 1; }
+.panel * { position: relative; z-index: 1; }
 
-    h1 {
-      color: #ffcc00;
-      text-shadow: 2px 2px #000;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 2em;
-      word-wrap: break-word;
-    }
+h1 {
+  color: #ffcc00;
+  text-shadow: 2px 2px #000;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  word-wrap: break-word;
+}
 
-    input[type="email"], input[type="password"], textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 3px solid #ffcc00;
-      border-radius: 20px;
-      font-size: 15px;
-      box-sizing: border-box;
-      font-family: 'Baloo 2', cursive, sans-serif;
-    }
+input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 3px solid #ffcc00;
+  border-radius: 20px;
+  font-size: 15px;
+  box-sizing: border-box;
+  font-family: 'Baloo 2', cursive, sans-serif;
+}
 
-    textarea {
-      height: 130px;
-      resize: none;
-      background: #fffacd;
-      box-shadow: inset 0px 2px 8px rgba(0,0,0,0.1);
-    }
+textarea {
+  height: 130px;
+  resize: none;
+  background: #fffacd;
+  box-shadow: inset 0px 2px 8px rgba(0,0,0,0.1);
+}
 
-    .preview { margin-top: 10px; }
-    .preview img { max-width: 100%; border-radius: 15px; border: 3px dashed #ffcc00; }
-    .remove-img {
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      font-size: 14px;
-      cursor: pointer;
-      width: 25px;
-      height: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-    }
+.preview { margin-top: 10px; }
+.preview img { max-width: 100%; border-radius: 15px; border: 3px dashed #ffcc00; }
 
-    button {
-      margin-top: 10px;
-      background: #ffcc00;
-      border: none;
-      color: #000;
-      padding: 12px 25px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s;
-      box-shadow: 0px 5px 8px rgba(0,0,0,0.2);
-    }
+.remove-img {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+}
 
-    button:hover { background: #f6e05e; }
-    .delete-btn { background: #ff6347; margin-top: 8px; width: 100%; color: white; border-radius: 20px; }
+button {
+  margin-top: 10px;
+  background: #ffcc00;
+  border: none;
+  color: #000;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+  box-shadow: 0px 5px 8px rgba(0,0,0,0.2);
+}
+button:hover { background: #f6e05e; }
 
-    .entries { margin-top: 10px; }
-    .entry {
-      background: rgba(255, 255, 224, 0.95);
-      border: 3px solid #ffcc00;
-      border-radius: 18px;
-      padding: 15px;
-      margin-bottom: 15px;
-      word-wrap: break-word;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-    }
+.entries { margin-top: 10px; }
+.entry {
+  position: relative;
+  background: rgba(255, 255, 224, 0.95);
+  border: 3px solid #ffcc00;
+  border-radius: 18px;
+  padding: 15px;
+  margin-bottom: 15px;
+  word-wrap: break-word;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+}
 
-    .entry img { max-width: 100%; border-radius: 15px; margin-top: 8px; }
-    .date { font-size: 12px; color: #444; margin-bottom: 8px; font-weight: bold; }
+.entry img { max-width: 100%; border-radius: 15px; margin-top: 8px; }
+.date { font-size: 12px; color: #444; margin-bottom: 8px; font-weight: bold; }
 
-    .bubble {
-      position: fixed;
-      bottom: -50px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 50%;
-      animation: floatUp 10s infinite ease-in;
-    }
+/* Ellipsis menu */
+.menu-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.2em; /* slightly smaller */
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+.menu-options {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #ffcc00;
+  border-radius: 15px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+  flex-direction: column;
+  z-index: 2;
+}
+.menu-options button {
+  width: 100%;
+  padding: 6px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.72em; /* 20% smaller */
+}
+.menu-options button:hover {
+  background: #f6e05e;
+  border-radius: 10px;
+}
 
-    @keyframes floatUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120vh); opacity: 0; } }
+.bubble {
+  position: fixed;
+  bottom: -50px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  animation: floatUp 10s infinite ease-in;
+}
 
-    /* Mobile responsiveness */
-    @media (max-width: 600px) {
-      body { padding: 10px; }
-      h1 { font-size: 1.8em; }
-      textarea { height: 120px; font-size: 14px; }
-      button { padding: 10px 20px; font-size: 15px; }
-      .panel { padding: 20px; border-radius: 20px; }
-      .entry { padding: 12px; border-radius: 15px; }
-      .remove-img { width: 25px; height: 25px; font-size: 14px; }
-    }
+@keyframes floatUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120vh); opacity: 0; } }
 
-    @media (min-width: 601px) and (max-width: 900px) {
-      h1 { font-size: 1.9em; }
-      textarea { height: 110px; font-size: 14px; }
-      button { padding: 10px 20px; font-size: 15px; }
-    }
-  </style>
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  h1 { font-size: 1.8em; }
+  textarea { height: 120px; font-size: 14px; }
+  button { padding: 10px 20px; font-size: 15px; }
+  .panel { padding: 20px; border-radius: 20px; }
+  .entry { padding: 12px; border-radius: 15px; }
+  .remove-img { width: 25px; height: 25px; font-size: 14px; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  h1 { font-size: 1.9em; }
+  textarea { height: 110px; font-size: 14px; }
+  button { padding: 10px 20px; font-size: 15px; }
+}
+</style>
 </head>
 <body>
 
-  <!-- Authentication Panel -->
-  <div class="panel" id="authPanel">
-    <h1>🔒 Login / Register 🔒</h1>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-    <button onclick="register()">Register</button>
-  </div>
+<!-- Authentication Panel -->
+<div class="panel" id="authPanel">
+  <h1>🔒 Login / Register 🔒</h1>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+</div>
 
-  <!-- Diary Panel -->
-  <div class="panel" id="diaryPanel" style="display:none;">
-    <h1>🍍 Dear Spongebob 🍍</h1>
-    <textarea id="diaryText" placeholder="Wat hafen vella?"></textarea>
-    <input type="file" id="imageInput" accept="image/*">
-    <div class="preview" id="preview"></div>
-    <button onclick="saveEntry()">💛 Save Entry</button>
-    <button onclick="logout()">Logout</button>
-  </div>
+<!-- Diary Panel -->
+<div class="panel" id="diaryPanel" style="display:none;">
+  <h1>🍍 Dear Spongebob 🍍</h1>
+  <textarea id="diaryText" placeholder="Wat hafen vella?"></textarea>
+  <input type="file" id="imageInput" accept="image/*">
+  <div class="preview" id="preview"></div>
+  <button onclick="saveEntry()">💛 Save Entry</button>
+  <button onclick="logout()">Logout</button>
+</div>
 
-  <!-- Entries Panel -->
-  <div class="panel" id="entriesPanel" style="display:none;">
-    <h1>📖 MY TIMELINE 📖</h1>
-    <div class="entries" id="entries"></div>
-  </div>
+<!-- Entries Panel -->
+<div class="panel" id="entriesPanel" style="display:none;">
+  <h1>📖 MY TIMELINE 📖</h1>
+  <div class="entries" id="entries"></div>
+</div>
 
-  <!-- Audio files -->
-  <audio id="sound1" preload="auto">
-    <source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="sound2" preload="auto">
-    <source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="sound3" preload="auto">
-    <source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg">
-  </audio>
+<!-- Audio files -->
+<audio id="sound1" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound2" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound3" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg">
+</audio>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, where, updateDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAmqyE4CxelCoSxEwqPcxkfY-Z3ivyGasA",
-      authDomain: "diary-appp.firebaseapp.com",
-      projectId: "diary-appp",
-      storageBucket: "diary-appp.appspot.com",
-      messagingSenderId: "33131635999",
-      appId: "1:33131635999:web:7a91f687ff42e0cf93fc2a",
-      measurementId: "G-4HF6ZXBQ1K"
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyAmqyE4CxelCoSxEwqPcxkfY-Z3ivyGasA",
+  authDomain: "diary-appp.firebaseapp.com",
+  projectId: "diary-appp",
+  storageBucket: "diary-appp.appspot.com",
+  messagingSenderId: "33131635999",
+  appId: "1:33131635999:web:7a91f687ff42e0cf93fc2a",
+  measurementId: "G-4HF6ZXBQ1K"
+};
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
 
-    const preview = document.getElementById("preview");
-    const imageInput = document.getElementById("imageInput");
-    let imageData = "";
+const preview = document.getElementById("preview");
+const imageInput = document.getElementById("imageInput");
+let imageData = "";
 
-    imageInput.addEventListener("change", function() {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          imageData = e.target.result;
-          preview.innerHTML = `<div style="position:relative; display:inline-block;"><img src="${imageData}"><button class="remove-img" onclick="removePreview()">✖</button></div>`;
-        }
-        reader.readAsDataURL(file);
-      }
+imageInput.addEventListener("change", function() {
+  const file = this.files[0];
+  if(file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      imageData = e.target.result;
+      preview.innerHTML = `<div style="position:relative; display:inline-block;"><img src="${imageData}"><button class="remove-img" onclick="removePreview()">✖</button></div>`;
+    }
+    reader.readAsDataURL(file);
+  }
+});
+
+window.removePreview = function() { preview.innerHTML=""; imageData=""; imageInput.value=""; }
+
+window.register = async function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  try { await createUserWithEmailAndPassword(auth,email,password); alert("Registered!"); }
+  catch(e){ alert(e.message); }
+}
+
+window.login = async function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  try { await signInWithEmailAndPassword(auth,email,password); }
+  catch(e){ alert(e.message); }
+}
+
+window.logout = async function() { await signOut(auth); }
+
+onAuthStateChanged(auth,user=>{
+  if(user){
+    document.getElementById("authPanel").style.display="none";
+    document.getElementById("diaryPanel").style.display="block";
+    document.getElementById("entriesPanel").style.display="block";
+    displayEntries();
+  } else {
+    document.getElementById("authPanel").style.display="block";
+    document.getElementById("diaryPanel").style.display="none";
+    document.getElementById("entriesPanel").style.display="none";
+  }
+});
+
+window.saveEntry = async function() {
+  const text = document.getElementById("diaryText").value.trim();
+  if(!text && !imageData){ alert("Write something or add a picture!"); return; }
+  try {
+    await addDoc(collection(db,"entries"),{
+      text,
+      image: imageData,
+      date: new Date().toLocaleString(),
+      userId: auth.currentUser.uid
     });
+    document.getElementById("diaryText").value="";
+    removePreview();
+    displayEntries();
+    const sounds = [document.getElementById("sound1"), document.getElementById("sound2"), document.getElementById("sound3")];
+    const randomSound = sounds[Math.floor(Math.random()*sounds.length)];
+    randomSound.currentTime = 0;
+    randomSound.play().catch(err=>console.log("Audio blocked:",err));
+  } catch(e){ console.error(e); }
+}
 
-    window.removePreview = function() { preview.innerHTML=""; imageData=""; imageInput.value=""; }
+// delete & edit functions
+window.deleteEntry = async function(id){
+  if(confirm("Are you sure you want to delete this entry?")){
+    await deleteDoc(doc(db,"entries",id));
+    displayEntries();
+  }
+}
 
-    window.register = async function() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      try { await createUserWithEmailAndPassword(auth, email, password); alert("Registered!"); } 
-      catch(e){ alert(e.message); }
-    }
+window.editEntry = async function(id){
+  const newText = prompt("Edit your entry:");
+  if(newText!==null){
+    await updateDoc(doc(db,"entries",id),{text:newText});
+    displayEntries();
+  }
+}
 
-    window.login = async function() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      try { await signInWithEmailAndPassword(auth, email, password); } 
-      catch(e){ alert(e.message); }
-    }
+async function displayEntries(){
+  const entriesDiv = document.getElementById("entries");
+  entriesDiv.innerHTML="";
+  const q = query(collection(db,"entries"),where("userId","==",auth.currentUser.uid));
+  const snapshot = await getDocs(q);
+  const entriesArray = snapshot.docs.map(docSnap=>({id:docSnap.id,...docSnap.data()}));
+  entriesArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-    window.logout = async function() { await signOut(auth); }
+  entriesArray.forEach(entry=>{
+    const entryDiv = document.createElement("div");
+    entryDiv.className = "entry";
+    entryDiv.innerHTML = `
+      <div class="date">🧽 ${entry.date}</div>
+      <div>${entry.text}</div>
+      ${entry.image?`<img src="${entry.image}">`:""}
+      <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+      <div class="menu-options">
+        <button onclick="editEntry('${entry.id}')">✏️ Edit</button>
+        <button onclick="deleteEntry('${entry.id}')">❌ Delete</button>
+      </div>
+    `;
+    entriesDiv.appendChild(entryDiv);
+  });
+}
 
-    onAuthStateChanged(auth, user => {
-      if(user){
-        document.getElementById("authPanel").style.display="none";
-        document.getElementById("diaryPanel").style.display="block";
-        document.getElementById("entriesPanel").style.display="block";
-        displayEntries();
-      } else {
-        document.getElementById("authPanel").style.display="block";
-        document.getElementById("diaryPanel").style.display="none";
-        document.getElementById("entriesPanel").style.display="none";
-      }
-    });
+// toggle menu
+window.toggleMenu = function(button){
+  const menu = button.nextElementSibling;
+  menu.style.display = menu.style.display==="flex"?"none":"flex";
+}
 
-    window.saveEntry = async function() {
-      const text = document.getElementById("diaryText").value.trim();
-      if(!text && !imageData){ alert("Write something or add a picture!"); return; }
-      try {
-        await addDoc(collection(db,"entries"),{
-          text,
-          image: imageData,
-          date: new Date().toLocaleString(),
-          userId: auth.currentUser.uid
-        });
-        document.getElementById("diaryText").value="";
-        removePreview();
-        displayEntries();
+function createBubble(){
+  const bubble = document.createElement("div");
+  const size = Math.random()*40+10;
+  bubble.className="bubble";
+  bubble.style.width=size+"px";
+  bubble.style.height=size+"px";
+  bubble.style.left=Math.random()*window.innerWidth+"px";
+  document.body.appendChild(bubble);
+  setTimeout(()=>bubble.remove(),10000);
+}
+setInterval(createBubble,1500);
 
-        const sounds = [
-          document.getElementById("sound1"),
-          document.getElementById("sound2"),
-          document.getElementById("sound3")
-        ];
-        const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-        randomSound.currentTime = 0;
-        randomSound.play().catch(err => console.log("Audio blocked:", err));
-
-      } catch(e){ console.error(e); }
-    }
-
-    window.deleteEntry = async function(id){
-      if(confirm("Are you sure you want to delete this entry?")){
-        await deleteDoc(doc(db,"entries",id));
-        displayEntries();
-      }
-    }
-
-    async function displayEntries(){
-      const entriesDiv = document.getElementById("entries");
-      entriesDiv.innerHTML="";
-      const q = query(collection(db,"entries"), where("userId","==",auth.currentUser.uid));
-      const snapshot = await getDocs(q);
-
-      const entriesArray = snapshot.docs.map(docSnap => ({
-        id: docSnap.id,
-        ...docSnap.data()
-      }));
-      entriesArray.sort((a,b) => new Date(b.date) - new Date(a.date));
-
-      entriesArray.forEach(entry => {
-        const entryDiv = document.createElement("div");
-        entryDiv.className = "entry";
-        entryDiv.innerHTML = `
-          <div class="date">🧽 ${entry.date}</div>
-          <div>${entry.text}</div>
-          ${entry.image ? `<img src="${entry.image}">` : ""}
-          <button class="delete-btn" onclick="deleteEntry('${entry.id}')">❌ Delete</button>
-        `;
-        entriesDiv.appendChild(entryDiv);
-      });
-    }
-
-    function createBubble() {
-      const bubble = document.createElement("div");
-      const size = Math.random() * 40 + 10;
-      bubble.className = "bubble";
-      bubble.style.width = size + "px";
-      bubble.style.height = size + "px";
-      bubble.style.left = Math.random() * window.innerWidth + "px";
-      document.body.appendChild(bubble);
-      setTimeout(() => bubble.remove(), 10000);
-    }
-    setInterval(createBubble, 1500);
-  </script>
+</script>
 </body>
 </html>
