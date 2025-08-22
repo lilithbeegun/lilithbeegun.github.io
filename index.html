@@ -29,18 +29,17 @@ body {
   width: 100%;
 }
 
-/* Panels with Glassmorphism */
+/* Panels */
 .panel {
   position: relative;
   width: 93%;
   max-width: 700px;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: #fefcbf;
   border-radius: 25px;
   box-shadow: 0px 8px 18px rgba(0,0,0,0.2);
   padding: 25px;
   margin-bottom: 20px;
+  border: 4px solid #ffcc00;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -107,8 +106,8 @@ textarea {
   box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Neon Buttons */
 button {
+  margin-top: 10px;
   background: #ffcc00;
   border: none;
   color: #000;
@@ -116,24 +115,10 @@ button {
   border-radius: 25px;
   cursor: pointer;
   font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+  transition: 0.2s;
+  box-shadow: 0px 5px 8px rgba(0,0,0,0.2);
 }
-button:hover {
-  box-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00;
-  background: #f6e05e;
-}
-
-/* Button row for save/logout */
-.button-row {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-.button-row button {
-  flex: 1;
-  margin: 0 5px;
-}
+button:hover { background: #f6e05e; }
 
 /* Character counter */
 .char-counter {
@@ -152,14 +137,7 @@ button:hover {
   gap: 12px;
   position: relative;
   z-index: 1;
-  max-height: 70vh;
-  overflow-y: auto;
 }
-
-/* Custom Scrollbar */
-.entries::-webkit-scrollbar { width: 10px; }
-.entries::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); border-radius: 10px; }
-.entries::-webkit-scrollbar-thumb { background: #ffcc00; border-radius: 10px; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); }
 
 .entry {
   position: relative;
@@ -172,13 +150,14 @@ button:hover {
   box-shadow: 0px 4px 14px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
-  overflow: visible;
-  word-break: break-word;
-  white-space: pre-line;
+  overflow: hidden;
   transition: transform 0.2s;
 }
-.entry:hover { transform: translateY(-2px); }
+.entry:hover {
+  transform: translateY(-2px);
+}
 
+/* Entry header */
 .entry-header {
   display: flex;
   align-items: center;
@@ -192,7 +171,11 @@ button:hover {
   margin-right: 10px;
   border: 2px solid #fff;
 }
-.entry-user { font-weight: bold; color: #ffcc00; text-shadow: 1px 1px #000; }
+.entry-user {
+  font-weight: bold;
+  color: #ffcc00;
+  text-shadow: 1px 1px #000;
+}
 .entry-date {
   font-size: 12px;
   color: #444;
@@ -205,8 +188,22 @@ button:hover {
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-.entry-buttons { margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end; }
-.entry-buttons button { background: #ffcc00; border: none; border-radius: 15px; padding: 6px 12px; cursor: pointer; font-size: 0.85em; transition: 0.2s; }
+/* Buttons inside entry */
+.entry-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.entry-buttons button {
+  background: #ffcc00;
+  border: none;
+  border-radius: 15px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: 0.2s;
+}
 .entry-buttons button:hover { background: #f6e05e; }
 
 /* Timeline background floating bubbles */
@@ -226,28 +223,17 @@ button:hover {
   100% { transform: translateY(-120vh) translateX(0); opacity: 0; }
 }
 
-/* Mobile adjustments */
+/* Mobile full-screen adjustments */
 @media (max-width: 600px) {
-  .panel#entriesPanel {
-    position: static;
-    width: 100vw;
-    height: auto;
-    max-width: 100vw;
-    min-width: 0;
+  .panel {
+    width: 100%;
+    height: 100vh;
     border-radius: 0;
-    padding: 0;
-    margin: 0 0 10px 0;
-    box-sizing: border-box;
-    overflow-y: visible;
-    z-index: 1;
+    padding: 15px;
+    overflow-y: auto;
   }
-  .entries {
-    max-height: 60vh;
-    padding-bottom: 10px;
-  }
-  .panel { width: 100vw; min-width: 0; max-width: 100vw; height: auto; border-radius: 0; padding: 10px 5px; margin-bottom: 10px; box-sizing: border-box; overflow-y: visible; }
   button { padding: 15px; font-size: 16px; }
-  .button-row button { margin: 0 2px; }
+  #diaryPanel button { position: sticky; bottom: 10px; display: block; width: calc(50% - 10px); margin: 5px 5px 0 0; }
 }
 </style>
 </head>
@@ -288,12 +274,8 @@ button:hover {
   <div class="char-counter" id="charCounter">0 / 500</div>
   <input type="file" id="imageInput" accept="image/*" multiple>
   <div class="preview" id="preview"></div>
-  
-  <!-- Buttons in one row -->
-  <div class="button-row">
-    <button onclick="saveEntry()">📥 Save Entry</button>
-    <button onclick="logout()">Logout</button>
-  </div>
+  <button onclick="saveEntry()">📥 Save Entry</button>
+  <button onclick="logout()">Logout</button>
 </div>
 
 <!-- Entries Panel -->
@@ -303,9 +285,15 @@ button:hover {
 </div>
 
 <!-- Audio files -->
-<audio id="sound1" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg"></audio>
-<audio id="sound2" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg"></audio>
-<audio id="sound3" preload="auto"><source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg"></audio>
+<audio id="sound1" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-bubble.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound2" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-laugh.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound3" preload="auto">
+  <source src="https://www.myinstants.com/media/sounds/spongebob-fail.mp3" type="audio/mpeg">
+</audio>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
@@ -328,12 +316,16 @@ const auth = getAuth(app);
 
 const preview = document.getElementById("preview");
 const imageInput = document.getElementById("imageInput");
-let imagesData = [];
+let imagesData = []; // multiple images
 
+// Character counter
 const diaryText = document.getElementById("diaryText");
 const charCounter = document.getElementById("charCounter");
-diaryText.addEventListener("input", ()=>{ charCounter.textContent = `${diaryText.value.length} / 500`; });
+diaryText.addEventListener("input", ()=>{
+  charCounter.textContent = `${diaryText.value.length} / 500`;
+});
 
+// Handle multiple image selection
 imageInput.addEventListener("change", function() {
   const files = Array.from(this.files);
   files.forEach(file => {
@@ -343,7 +335,10 @@ imageInput.addEventListener("change", function() {
       imagesData.push(imgSrc);
       const div = document.createElement("div");
       div.innerHTML = `<img src="${imgSrc}"><button class="remove-img">✖</button>`;
-      div.querySelector("button").addEventListener("click", ()=>{ imagesData = imagesData.filter(i => i!==imgSrc); div.remove(); });
+      div.querySelector("button").addEventListener("click", ()=>{
+        imagesData = imagesData.filter(i => i!==imgSrc);
+        div.remove();
+      });
       preview.appendChild(div);
     }
     reader.readAsDataURL(file);
@@ -380,6 +375,7 @@ onAuthStateChanged(auth,user=>{
   }
 });
 
+// Password toggle
 const passwordInput = document.getElementById("password");
 const togglePassword = document.getElementById("togglePassword");
 togglePassword.addEventListener("click", ()=>{
@@ -395,31 +391,51 @@ window.saveEntry = async function() {
     await addDoc(collection(db,"entries"),{
       text,
       images: imagesData,
-      date: new Date().toISOString(),
+      date: new Date().toLocaleString(),
       userId: auth.currentUser.uid
     });
-    diaryText.value=""; charCounter.textContent="0 / 500";
-    preview.innerHTML=""; imagesData=[];
+    diaryText.value="";
+    charCounter.textContent = "0 / 500";
+    preview.innerHTML = "";
+    imagesData = [];
     displayEntries();
     const sounds = [document.getElementById("sound1"), document.getElementById("sound2"), document.getElementById("sound3")];
     const randomSound = sounds[Math.floor(Math.random()*sounds.length)];
-    randomSound.currentTime = 0; randomSound.play().catch(err=>console.log("Audio blocked:",err));
+    randomSound.currentTime = 0;
+    randomSound.play().catch(err=>console.log("Audio blocked:",err));
   } catch(e){ console.error(e); }
 }
 
-window.deleteEntry = async function(id){
+// --- FIXED DELETE FUNCTION ---
+window.deleteEntry = async function(id, buttonElement){
   if(confirm("Are you sure you want to delete this entry?")){
-    await deleteDoc(doc(db,"entries",id));
-    displayEntries();
+    try {
+      await deleteDoc(doc(db,"entries",id));
+      const entryDiv = buttonElement.closest(".entry");
+      if(entryDiv) entryDiv.remove();
+    } catch(e){
+      console.error(e);
+    }
   }
 }
 
-window.editEntry = async function(id){
-  const newText = prompt("Edit your entry:");
-  if(newText!==null){ await updateDoc(doc(db,"entries",id),{text:newText}); displayEntries(); }
+// --- EDIT FUNCTION UPDATES DOM DIRECTLY ---
+window.editEntry = async function(id, buttonElement){
+  const entryDiv = buttonElement.closest(".entry");
+  const currentTextDiv = entryDiv.querySelector("div:nth-of-type(2)");
+  const newText = prompt("Edit your entry:", currentTextDiv.textContent);
+  if(newText!==null){
+    try {
+      await updateDoc(doc(db,"entries",id),{text:newText});
+      currentTextDiv.textContent = newText;
+    } catch(e){ console.error(e); }
+  }
 }
 
-function formatDate(dateStr){ return new Date(dateStr).toLocaleString(undefined,{year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}); }
+function formatDate(dateStr){
+  const d = new Date(dateStr);
+  return d.toLocaleString(undefined,{year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+}
 
 async function displayEntries(){
   const entriesDiv = document.getElementById("entries");
@@ -429,7 +445,10 @@ async function displayEntries(){
   const entriesArray = snapshot.docs.map(docSnap=>({id:docSnap.id,...docSnap.data()}));
   entriesArray.sort((a,b)=>new Date(b.date)-new Date(a.date));
 
-  if(entriesArray.length===0){ entriesDiv.innerHTML = "<p style='text-align:center; color:#555;'>No entries yet. Write your first diary entry!</p>"; return; }
+  if(entriesArray.length===0){
+    entriesDiv.innerHTML = "<p style='text-align:center; color:#555;'>No entries yet. Write your first diary entry!</p>";
+    return;
+  }
 
   entriesArray.forEach(entry=>{
     const entryDiv = document.createElement("div");
@@ -438,21 +457,22 @@ async function displayEntries(){
     if(entry.images) entry.images.forEach(img=>{ imagesHtml += `<img src="${img}">`; });
     entryDiv.innerHTML = `
       <div class="entry-header">
-        <div class="entry-avatar"></div>
-        <div class="entry-user">SpongeFan</div>
+        <div class="entry-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTDtSqwiTIPAZNmXq5Y8aTR-4T2DcPJDeFAg&s" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid #fff;"></div>
+        <div class="entry-user">SpongeBob</div>
         <div class="entry-date">🧽 ${formatDate(entry.date)}</div>
       </div>
       <div>${entry.text}</div>
       ${imagesHtml}
       <div class="entry-buttons">
-        <button onclick="editEntry('${entry.id}')">✏️ Edit</button>
-        <button onclick="deleteEntry('${entry.id}')">❌ Delete</button>
+        <button onclick="editEntry('${entry.id}', this)">✏️ Edit</button>
+        <button onclick="deleteEntry('${entry.id}', this)">❌ Delete</button>
       </div>
     `;
     entriesDiv.appendChild(entryDiv);
   });
 }
 
+// Floating background bubbles
 function createTimelineBubble(){
   const bubble = document.createElement("div");
   const size = Math.random()*30+10;
